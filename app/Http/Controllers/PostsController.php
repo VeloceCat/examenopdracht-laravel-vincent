@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
@@ -17,9 +18,12 @@ class PostsController extends Controller
     }
 
 
-    public function show(Post $post)
+    public function show(Post $post, Comment $comment)
     {
-        return view('posts.show')->with(['post' => $post]);
+        $comments = Comment::with('post')->orderBy('id', 'desc');
+        //$comments = Comment::all();
+
+        return view('posts.show')->with(['post' => $post, 'comment' => $comment, 'comments' => $comments]);
     }
 
 

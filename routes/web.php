@@ -14,6 +14,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::name('update_post_path')->put('/posts/{post}', 'PostsController@update');
 
     Route::name('delete_post_path')->delete('/posts/{post}', 'PostsController@delete');
+
+
+    Route::name('create_comment_path')->get('/posts/{post}/createComment', 'CommentsController@create');
+
+    Route::name('store_comment_path')->post('/posts/{post}', 'CommentsController@store');
+
+    Route::name('edit_comment_path')->get('/posts/{post}/editComment', 'CommentsController@edit');
+
+    Route::name('update_comment_path')->put('/posts/{post}/{comment}', 'CommentsController@update');
+
+    Route::name('delete_comment_path')->delete('/posts/{post}/{comment}', 'CommentsController@delete');
 });
 
 Route::get('/', 'PostsController@index'); 

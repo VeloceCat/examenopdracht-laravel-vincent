@@ -34,3 +34,16 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
         }
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Comment::class, function (Faker\Generator $faker) {
+    return [
+        'comment' => $faker->sentence,
+        'user_id' => function () {
+            return factory(App\User::class)->create()->id;
+        },
+        'post_id' => function () {
+            return factory(App\Post::class)->create()->id;
+        }
+    ];
+});
