@@ -2,24 +2,18 @@
 
 namespace App;
 
-use App\Post;
 use App\User;
+use App\Post;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Vote extends Model
 {
-    protected $table = 'comments';
-
-    protected $casts = ['user_id' => 'integer', 'post_id' => 'integer'];
-
-    protected $fillable = ['comment'];
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 
     public function post() {
         return $this->belongsTo(Post::class);
-    }
-    
-    public function user() {
-        return $this->belongsTo(User::class);
     }
 
     public function wasCreatedBy($user) {

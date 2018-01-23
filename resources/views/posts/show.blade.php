@@ -2,56 +2,89 @@
 
 @section('content')
 
-    <div class="row">
-        <div class="col-md-12">
-
-            <h2>{{ $post->title }}</h2>
-            <p>{{ $post->description }}</p>
-            <p>Posted {{ $post->created_at->diffForHumans() }}</p>
-
-        </div>
+    <div class="breadcrumb">
+        <a href="/">&larr; back to overview</a>
     </div>
-    <hr>
 
-    @foreach($post->comments as $comment)
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+            Article: {{ $post->title }}
+        </div>
+        <div class="panel-content">
+            <div class="vote">
+                <form action="route('vote_up_path', ['post' => $post->id])" method="POST" class="form-inline upvote">
+                    <input type="hidden" name="_token" value="Nvd9XhT6eceHc9RIGskTVRPXr7SxhfhiG5eLGmrW">
 
-        <div class="row">
-            <ul class="col-md-12">
+                    <button name="article_id"value="1">
+                        <i class="fa fa-btn fa-caret-up" title="upvote"></i>
+                    </button>
+                </form>
+                <form action="route('vote_down_path', ['post' => $post->id])" method="POST" class="form-inline downvote">
+                    <input type="hidden" name="_token" value="Nvd9XhT6eceHc9RIGskTVRPXr7SxhfhiG5eLGmrW">
 
-                <li>
-                    {{ $comment->comment }}
+                    <button name="article_id"value="1">
+                        <i class="fa fa-btn fa-caret-down" title="downvote"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="url">
+                <a href="{{ $post->url }}" class="urlTitle">{{ $post->title }}</a>
 
-                    @if($comment->wasCreatedBy( Auth::user() ))
-                        <small class="pull-right">
-                            <a href="{{ route('edit_comment_path', ['comment' => $comment->id]) }}" class="btn btn-info">Edit</a>
-                        </small>
+                @if($post->wasCreatedBy( Auth::user() ))
+                    <small class="pull-right">
+                        <a href="{{ route('edit_post_path', ['post' => $post->id]) }}" class="btn btn-info">Edit</a>
+                    </small>
+                @endif
+            </div>
+            <div class="info">
+                points | posted by <b>{{ $post->user->name }}</b> on {{ $post->created_at }} | {{ $post->comments()->count() }} comments
+            </div>
+            <div class="description">
+                <br>
+                <p><b>Description:</b></p>
+                {{ $post->description }}
+            </div>
+        </div>
 
-                        <small class="pull-right">
-                            <form action="{{ route('delete_comment_path', ['post' => $post->id, 'comment' => $comment->id]) }}" method="POST">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </small>
-                    @endif
+        <div class="comments">
+            <ul>
+                @foreach($post->comments as $comment)
+                    <li>
+                        <div class="comment-body clearfix">
+                            <div class="comment-text">
+                                {{ $comment->comment }}
+                            </div>
+                            <div style="margin-right: 40px;">
+                                @if($comment->wasCreatedBy( Auth::user() ))
+                                    <small class="pull-right">
+                                        <a href="{{ route('edit_comment_path', ['comment' => $comment->id]) }}" class="btn btn-info">Edit</a>
+                                    </small>
 
-                    <hr>
-
-                    <p>Posted {{ $comment->created_at->diffForHumans() }} by <b>{{ $comment->user->name }}</b></p>
-
-                </li>
-
+                                    <small class="pull-right" style="margin-right: 10px;">
+                                        <form action="{{ route('delete_comment_path', ['post' => $post->id, 'comment' => $comment->id]) }}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </small>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="comment-info">
+                            Posted by <b>{{ $comment->user->name }}</b> on {{ $comment->created_at }}
+                        </div>
+                    </li>
+                @endforeach
             </ul>
+            <div style="margin-left: 40px;">
+                @if(\Auth::check()) 
+                    <a href="{{ route('create_comment_path', ['post' => $post->id]) }}" class="btn btn-success">Add Comment</a>
+                @else
+                    <p>You need to be <a href="{{ route('login') }}">logged in</a> to comment</p>
+                @endif
+            </div>
         </div>
-
-        <hr>
-
-    @endforeach
-    <div class="row">
-        @if(\Auth::check()) 
-            <a href="{{ route('create_comment_path', ['post' => $post->id]) }}" class="btn btn-success">Add Comment</a>
-        @else
-            <p>You need to be <a href="{{ route('login') }}">logged in</a> to comment</p>
-        @endif
     </div>
+
+
 @stop
