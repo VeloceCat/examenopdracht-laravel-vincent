@@ -13,8 +13,12 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     
+=======
+
+>>>>>>> eea645573ebd7d14c68ca80a5bca4a513b857892
 =======
 
 >>>>>>> eea645573ebd7d14c68ca80a5bca4a513b857892
@@ -60,7 +64,10 @@
         .comments li {
             margin: 16px 0 32px 50px;
 <<<<<<< HEAD
+<<<<<<< HEAD
             list-style-type: none; 
+=======
+>>>>>>> eea645573ebd7d14c68ca80a5bca4a513b857892
 =======
 >>>>>>> eea645573ebd7d14c68ca80a5bca4a513b857892
         }

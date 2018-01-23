@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class VotesController extends Controller
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     public function voteup(Request $request, $id)
     {
         $post = Post::find($id);
@@ -46,6 +47,8 @@ class VotesController extends Controller
 
         return redirect()->route('vote_down_path', [$post->post]);
 =======
+=======
+>>>>>>> eea645573ebd7d14c68ca80a5bca4a513b857892
     public function voteup($id)
     {
         $post= Post::find($id);
@@ -57,6 +60,9 @@ class VotesController extends Controller
     {
         $post= Post::find($id);
 
+<<<<<<< HEAD
+>>>>>>> eea645573ebd7d14c68ca80a5bca4a513b857892
+=======
 >>>>>>> eea645573ebd7d14c68ca80a5bca4a513b857892
     }
 

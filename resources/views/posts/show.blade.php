@@ -5,6 +5,7 @@
     <div class="breadcrumb">
         <a href="/">&larr; back to overview</a>
     </div>
+<<<<<<< HEAD
 
     <div class="panel panel-default">
         <div class="panel-heading clearfix">
@@ -25,6 +26,15 @@
 
                     <button name="post_id"value="{{ $post->id }}">
 =======
+=======
+
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+            Article: {{ $post->title }}
+        </div>
+        <div class="panel-content">
+            <div class="vote">
+>>>>>>> eea645573ebd7d14c68ca80a5bca4a513b857892
                 <form action="route('vote_up_path', ['post' => $post->id])" method="POST" class="form-inline upvote">
                     <input type="hidden" name="_token" value="Nvd9XhT6eceHc9RIGskTVRPXr7SxhfhiG5eLGmrW">
 
@@ -36,6 +46,9 @@
                     <input type="hidden" name="_token" value="Nvd9XhT6eceHc9RIGskTVRPXr7SxhfhiG5eLGmrW">
 
                     <button name="article_id"value="1">
+<<<<<<< HEAD
+>>>>>>> eea645573ebd7d14c68ca80a5bca4a513b857892
+=======
 >>>>>>> eea645573ebd7d14c68ca80a5bca4a513b857892
                         <i class="fa fa-btn fa-caret-down" title="downvote"></i>
                     </button>
@@ -43,7 +56,11 @@
             </div>
             <div class="url">
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <a href="{{ $post->url }}" target="_blank" class="urlTitle">{{ $post->title }}</a>
+=======
+                <a href="{{ $post->url }}" class="urlTitle">{{ $post->title }}</a>
+>>>>>>> eea645573ebd7d14c68ca80a5bca4a513b857892
 =======
                 <a href="{{ $post->url }}" class="urlTitle">{{ $post->title }}</a>
 >>>>>>> eea645573ebd7d14c68ca80a5bca4a513b857892
@@ -56,7 +73,11 @@
             </div>
             <div class="info">
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <p>{{ $post->votes()->count() }} points | posted by <b>{{ $post->user->name }}</b> on {{ $post->created_at }} | {{ $post->comments()->count() }} comments</p>
+=======
+                points | posted by <b>{{ $post->user->name }}</b> on {{ $post->created_at }} | {{ $post->comments()->count() }} comments
+>>>>>>> eea645573ebd7d14c68ca80a5bca4a513b857892
 =======
                 points | posted by <b>{{ $post->user->name }}</b> on {{ $post->created_at }} | {{ $post->comments()->count() }} comments
 >>>>>>> eea645573ebd7d14c68ca80a5bca4a513b857892
