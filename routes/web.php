@@ -16,15 +16,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::name('delete_post_path')->delete('/posts/{post}', 'PostsController@delete');
 
 
-    Route::name('create_comment_path')->get('/posts/{post}/createComment', 'CommentsController@create');
+    Route::name('create_comment_path')->get('/comments/{post_id}/create', 'CommentsController@create');
 
-    Route::name('store_comment_path')->post('/posts/{post}', 'CommentsController@store');
+    Route::name('store_comment_path')->post('/comments/{post_id}', 'CommentsController@store');
 
-    Route::name('edit_comment_path')->get('/posts/{post}/editComment', 'CommentsController@edit');
+    Route::name('edit_comment_path')->get('/comments/{id}/edit', 'CommentsController@edit');
 
-    Route::name('update_comment_path')->put('/posts/{post}/{comment}', 'CommentsController@update');
+    Route::name('update_comment_path')->put('/comments/{id}', 'CommentsController@update');
 
-    Route::name('delete_comment_path')->delete('/posts/{post}/{comment}', 'CommentsController@delete');
+    Route::name('delete_comment_path')->delete('/comments/{comment}', "CommentsController@delete");
+
+
+    Route::name('vote_up_path')->post('/votes/{post_id}/up', 'VotesController@voteup');
+
+    Route::name('vote_down_path')->post('/votes/{post_id}/down', 'VotesController@votedown');
 });
 
 Route::get('/', 'PostsController@index'); 

@@ -7,20 +7,24 @@ use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateCommentRequest;
 
+
 class CommentsController extends Controller
 {
-    public function create(Post $post) 
+
+    public function create($id)
     {
+        $post= Post::find($id);
+
         $comment = new Comment;
 
         return view('comments.create')->with(['comment' => $comment, 'post' => $post]);
     }
 
-    public function store(CreateCommentRequest $request, $post_id) 
+    public function store(CreateCommentRequest $request, $id) 
     {
-        $comment = new Comment;
+        $post= Post::find($id);
 
-        $post= Post::find($post_id);
+        $comment = new Comment;
 
         $comment->comment = $request->comment;
         $comment->post()->associate($post);
@@ -35,36 +39,39 @@ class CommentsController extends Controller
     }
 
    
-    public function edit(Comment $comment) 
+    public function edit($id) 
     {
-        if($comment->user_id != \Auth::user()->id) {
-            return redirect()->route('post_path');
-        }
+        $comment = Comment::find($id);
 
         return view('comments.edit')->with(['comment' => $comment]);
     }
 
-    public function update(Comment $comment, UpdateCommentRequest $request)
+    public function update(Request $request, $id)
     {
-        $comment->update(
-            $request->only('comment')
-        );
+        $comment = Comment::find($id);
+
+        $comment->comment = $request->comment;
+        $comment->save();
 
         session()->flash('message', 'Comment Updated!');
 
-        return redirect()->route('update_comment_path', ['comment' => $comment->id]);
+        return redirect()->route('posts_path', $comment->post->id);
     }
 
     public function delete(Comment $comment)
     {
         if($comment->user_id != \Auth::user()->id) {
-            return redirect()->route('post_path', ['comment' => $comment->id]);
+            session()->flash('message', 'No permission!');
+            
+            return redirect()->route('posts_path');
         }
 
-        $post->delete();
+        $comment->delete();
 
-        session()->flash('message', 'Post Deleted!');
+        session()->flash('message', 'Comment Deleted!');
 
         return redirect()->route('posts_path');
     }
+
+    
 }

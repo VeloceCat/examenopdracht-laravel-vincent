@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Post;
+use App\Vote;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -30,6 +31,11 @@ class User extends Authenticatable
 
     public function posts() {
         return $this->hasMany(Post::class);
+    }
+
+    public function votes() 
+    {
+        return $this->hasMany(Vote::class);
     }
 
 }

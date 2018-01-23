@@ -3,7 +3,10 @@
 namespace App;
 
 use App\User;
+use App\Comment;
+use App\Vote;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Post extends Model {
     protected $table = 'posts';
@@ -26,7 +29,11 @@ class Post extends Model {
     }
 
     public function comments() {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany(Comment::class);
+    }
+
+    public function votes() {
+        return $this->hasMany(Vote::class);
     }
 
 }
