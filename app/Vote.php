@@ -8,18 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vote extends Model
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     protected $table = 'votes';
 
     protected $casts = ['user_id' => 'integer', 'post_id' => 'integer'];
 
     protected $fillable = ['vote'];
 
-=======
->>>>>>> eea645573ebd7d14c68ca80a5bca4a513b857892
-=======
->>>>>>> eea645573ebd7d14c68ca80a5bca4a513b857892
+
     public function user() {
         return $this->belongsTo(User::class);
     }
